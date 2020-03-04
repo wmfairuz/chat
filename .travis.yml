@@ -4,12 +4,16 @@ matrix:
   include:
     - php: 7.2
       env: ILLUMINATE_VERSION=6.0
+      env: ORCHESTRA_VERSION=4.* 
     - php: 7.2
       env: ILLUMINATE_VERSION=6.*
+      env: ORCHESTRA_VERSION=4.* 
     - php: 7.2 
       env: ILLUMINATE_VERSION=7.0 
+      env: ORCHESTRA_VERSION=5.* 
     - php: 7.2 
       env: ILLUMINATE_VERSION=7.* 
+      env: ORCHESTRA_VERSION=5.* 
 php:
   - 7.2
 
@@ -17,6 +21,7 @@ sudo: false
 
 before_install:
   - composer require "illuminate/support:${ILLUMINATE_VERSION}" --no-update
+  - composer require "orchestra/testbench:${ORCHESTRA_VERSION}" --dev --no-update
 
 install: composer update --prefer-source --no-interaction --dev
 
