@@ -4,7 +4,7 @@ namespace Musonza\Chat\Eventing;
 
 use Illuminate\Broadcasting\Channel;
 use Illuminate\Broadcasting\InteractsWithSockets;
-use Illuminate\Broadcasting\PrivateChannel;
+use Illuminate\Broadcasting\PresenceChannel;
 use Illuminate\Contracts\Broadcasting\ShouldBroadcast;
 use Illuminate\Foundation\Events\Dispatchable;
 use Illuminate\Queue\SerializesModels;
@@ -29,7 +29,7 @@ class MessageWasSent extends Event implements ShouldBroadcast
      */
     public function broadcastOn()
     {
-        return new PrivateChannel('mc-chat-conversation.'.$this->message->conversation_id);
+        return new PresenceChannel('mc-chat-conversation.'.$this->message->conversation_id);
     }
 
     public function broadcastWith()
