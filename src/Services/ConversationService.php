@@ -99,6 +99,29 @@ class ConversationService
     }
 
     /**
+     * Get Private Conversation between two users.
+     *
+     * @param Model $participantOne
+     * @param Model $participantTwo
+     *
+     * @return Conversation
+     */
+    public function common(Model $participantOne, Model $participantTwo)
+    {
+        $participantOneConversationIds = $this->conversation
+            ->participantConversations($participantOne, false)
+            ->pluck('id');
+
+        $participantTwoConversationIds = $this->conversation
+            ->participantConversations($participantTwo, false)
+            ->pluck('id');
+
+        $common = $this->getConversationsInCommon($participantOneConversationIds, $participantTwoConversationIds);
+
+        return $common ? $this->conversation->findOrFail($common[0]) : null;
+    }
+
+    /**
      * Get Conversations with latest message.
      *
      * @return LengthAwarePaginator
